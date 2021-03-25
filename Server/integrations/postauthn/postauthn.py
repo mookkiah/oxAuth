@@ -8,19 +8,19 @@
 from org.gluu.model.custom.script.type.postauthn import PostAuthnType
 from java.lang import String
 
+
 class PostAuthn(PostAuthnType):
     def __init__(self, currentTimeMillis):
         self.currentTimeMillis = currentTimeMillis
 
     def init(self, customScript, configurationAttributes):
-        print "Post Authn script. Initializing ..."
-        print "Post Authn script. Initialized successfully"
-
+        print "Mahendran Post Authn script... Initializing ..."
+        print "Mahendran Post Authn script.... Initialized successfully"
         return True
 
     def destroy(self, configurationAttributes):
-        print "Post Authn script. Destroying ..."
-        print "Post Authn script. Destroyed successfully"
+        print "Mahendran Post Authn script. Destroying"
+        print "Mahendran Post Authn script. Destroyed successfully"
         return True
 
     def getApiVersion(self):
@@ -31,6 +31,7 @@ class PostAuthn(PostAuthnType):
     # Note :
     # context is reference of org.gluu.oxauth.service.external.context.ExternalPostAuthnContext(in https://github.com/GluuFederation/oxauth project, )
     def forceReAuthentication(self, context):
+        print "Mahendran Post Authn script forceReAuthentication"
         return False
 
     # This method is called during Authorization Request at Authorization Endpoint.
@@ -39,4 +40,5 @@ class PostAuthn(PostAuthnType):
     # Note :
     # context is reference of org.gluu.oxauth.service.external.context.ExternalPostAuthnContext(in https://github.com/GluuFederation/oxauth project, )
     def forceAuthorization(self, context):
+        print "Mahendran Post Authn script forceAuthorization"
         return False
