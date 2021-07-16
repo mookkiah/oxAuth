@@ -3,12 +3,23 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.gluu</groupId>
     <artifactId>oxauth-pingid</artifactId>
-    <version>1.0</version>
+    <version>1.1</version>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>11</source>
+                    <target>11</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
     <packaging>jar</packaging>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.source>1.8</maven.compiler.source>
-        <maven.compiler.target>1.8</maven.compiler.target>
+        <java.version>11</java.version>
         <log4j.version>2.13.3</log4j.version>
     </properties>
     <dependencies>
