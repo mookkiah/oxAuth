@@ -7,6 +7,8 @@ import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.core.Response;
+
+import org.apache.commons.lang3.StringUtils;
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.HttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
@@ -37,9 +39,19 @@ public class Utils {
         RequestConfig config = RequestConfig.custom().setConnectTimeout(10 * 1000).build();
         HttpClient httpClient = HttpClientBuilder.create().setDefaultRequestConfig(config)
                 .setConnectionManager(manager).build();
-        
         ApacheHttpClient4Engine engine = new ApacheHttpClient4Engine(httpClient);
-        rsClient = new ResteasyClientBuilder().httpEngine(engine).build();
+        String proxyHost = System.getProperty("https.proxyHost");
+        String proxyPort = System.getProperty("https.proxyPort");
+        if (StringUtils.isNotEmpty(proxyHost) && StringUtils.isNoneEmpty(proxyPort)){
+            //TODO proxy authentication?
+            rsClient =
+                    new ResteasyClientBuilder().defaultProxy(proxyHost,
+                            Integer.valueOf(proxyPort)).httpEngine(engine).build();
+        }else{
+            rsClient =
+                    new ResteasyClientBuilder().httpEngine(engine).build();
+        }
+
     }
 
     public static String generateHS256Signature(String input, byte secret[]) 
